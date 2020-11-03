@@ -1,0 +1,12 @@
+{
+  "name": "AIO-travel",
+  "displayName": "AIO-travel",
+  "expo": {
+    "name": "AIO-travel",
+    "slug": "AIO-travel",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
