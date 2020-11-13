@@ -2,6 +2,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { Component } from 'react';
 import { Button, Text, View, AppRegistry } from 'react-native';
+
 //React Navigation//
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -13,9 +14,10 @@ import firebase from "firebase/app";
 import styles from './StyleSheet';
 //Screens//
 import Login from './components/Login';
-import SignUp from './components/signUp';
+import SignUp from './components/SignUp';
 import Home from './components/Home';
 import Loading from './components/Loading';
+import AddTrip from './components/AddTrip';
 
 
 
@@ -56,6 +58,10 @@ export default class App extends React.Component {
            <Stack.Screen
             name = "Home"
             component={Home}
+          />
+           <Stack.Screen
+            name = "AddTrip"
+            component={AddTrip}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -38,9 +38,17 @@ export default class Home extends React.Component {
         <TouchableOpacity style={styles.loginBtn}>
           <Text 
             style={styles.loginText}
+            onPress={() => this.props.navigation.navigate('AddTrip')}>Add Trip
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={styles.loginBtn}>
+          <Text 
+            style={styles.loginText}
             onPress={this.handleLogout}>Log out
           </Text>
         </TouchableOpacity>
+        
         
       </View>
     );
