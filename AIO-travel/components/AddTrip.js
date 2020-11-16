@@ -10,14 +10,24 @@ import styles from '../StyleSheet';
 import firebase from "firebase/app";
 require("firebase/auth");
 require("firebase/firestore");
+var database = firebase.database();
 
 export default class AddTrip extends React.Component {
     state = {
         TripName: "",
         Location:"",
-        Dates: "",
+        StartDate: "",
+        EndDate:"",
         Notes: ""
     }
+
+    // handleTrip = () => {
+    //     const { TripName, Location, StartDate, EndDate, Notes} = this.state
+    //     firebase
+           
+    //     .then(() => this.props.navigation.navigate('Home'))
+    //     .catch(error => this.setState({errorMessage: error.message}))
+    //   }
     render() {
         return (
             <View style={styles.container}>
@@ -42,14 +52,12 @@ export default class AddTrip extends React.Component {
 
           <label for="start">Start date:</label>
 
-            <input type="date" id="start" name="trip-start"
-                value="2020-07-22"
+            <input type="date" id="trip-start" name="trip-start"
                 min="2020-01-01" max="2100-12-31">
             </input>
 
             <label for="start">End date:</label>
-            <input type="date" id="end" name="trip-end"
-                value="2020-07-22"
+            <input type="date" id="trip-end" name="trip-end"
                 min="2020-01-01" max="2100-12-31">
             </input>
 
@@ -61,7 +69,14 @@ export default class AddTrip extends React.Component {
           onChangeText={Notes => this.setState({ Notes })}
           value={this.state.Notes}
           />
-            </View>
+
+          </View>
+            <TouchableOpacity style={styles.loginBtn}>
+            <Text 
+                style={styles.loginText}
+                onPress={this.handleTrip}>Add Trip
+            </Text>
+            </TouchableOpacity>
             </View>
         );
     }
