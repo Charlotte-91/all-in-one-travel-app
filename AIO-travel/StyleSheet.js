@@ -54,6 +54,10 @@ const styles = StyleSheet.create({
     },
     loginText:{
       color:"white"
+    },
+    datePickerStyle: {
+      width: 200,
+      marginTop: 20,
     }
   });
   
