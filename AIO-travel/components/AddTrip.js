@@ -14,104 +14,19 @@ require("firebase/firestore");
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Modal from 'react-native-modal';
+import StartDate from './StartDatePicker'
+import EndDate from './EndDatePicker'
 
-export default class AddTrip extends Component {
+export default class AddTrip extends React.Component {
     state = {
         TripName: "",
         Location:"",
         StartDate: "",
         EndDate:"",
-        Notes: "",
-        date: new Date(),
-        mode:'date',
-        show: false,
-        //
-        showDate:false
+        Notes: ""
     }
-    setDate =(event, date)=>{
-        date=date||this.state.state
-        this.setState({
-            show: Platform.OS==='ios'?true:false,
-            date,
-        });
-    }
-    show= mode=>{
-        this.setState({
-            show:true,
-            mode,
-        });
-    }
-    datepicker=()=>{
-        this.show('date');
-    }
-    timepicker=()=>{
-        this.show('time');
-    }
-
-    showDatepicker=()=>{
-        this.setState({ showDate:!this.state.showDate, mode:'date'});
-    }
-    showTimepicker=()=>{
-        this.setState({ showDate:!this.state.showDate, mode:'time'});
-    }
-    checkAndoroidIos(show, date, mode){
-        if(Platform.OS==='ios'){
-            return(
-                <View>
-                    <View>
-                        <Button onPress={this.showDatepicker} title="Show date picker!" />
-                    </View>
-                    <View> 
-                        <Button onPress={this.showTimepicker} title="Show time picker!" />
-                    </View>
-                        <View style={{height:300}}>
-                            <Modal
-                            isVisible={this.state.showDate}>
-                                <View style={{backgroundColor:"#fff", height:250,
-                                justifyContent:'center',
-                                margin:200
-                            }}>
-                                <DateTimePicker
-                        value={date}
-                        mode={mode}
-                        is24Hour={true}
-                        display="default"
-                        onChange={this.setDate}
-                        />
-                        <Button title="Hide Modal" onPress={this.showDatepicker}>
-
-                        </Button>
-                                </View>
-                            </Modal>
-                    </View>
-                </View>
-            )
-        }else{
-            return(
-                <View>
-                    <View>
-                        <Button onPress={this.showDatepicker} title="Show date picker!" />
-                    </View>
-                    <View> 
-                        <Button onPress={this.showTimepicker} title="Show time picker!" />
-                    </View>
-                    {show && (
-                        <DateTimePicker
-                        value={date}
-                        mode={mode}
-                        is24Hour={true}
-                        display="default"
-                        onChange={this.setDate}
-                        />
-                    )}
-                    </View>
-                    
-            )
-        }
-    };
     render() {
-        
-        const { show, date, mode } = this.state;
+
         return (
             <View style={styles.container}>
             <View style={styles.inputView}>  
@@ -122,6 +37,7 @@ export default class AddTrip extends Component {
           onChangeText={TripName => this.setState({ TripName })}
           value={this.state.TripName}
           />
+          
           </View>
           <View style={styles.inputView}> 
              <TextInput
@@ -132,9 +48,8 @@ export default class AddTrip extends Component {
           value={this.state.Location}
           />
           </View>
-            <SafeAreaView>
-                {this.checkAndoroidIos(show, date, mode)}
-                </SafeAreaView>     
+            <StartDate></StartDate> 
+            <EndDate></EndDate>
 
 
             <View style={styles.inputView}> 
