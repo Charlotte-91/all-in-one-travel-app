@@ -13,7 +13,8 @@ import {db} from '../config';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Modal from 'react-native-modal';
 import Start from './StartDatePicker'
-import EndDate from './EndDatePicker'
+import End from './EndDatePicker'
+import { startClock } from 'react-native-reanimated';
 
 
 
@@ -27,9 +28,6 @@ export default class AddTrip extends React.Component {
         Notes:""
     };
 
-    callbackFunction = (StartDate) => {
-        this.setState({StartDate: StartDate})
-    }
 
     handleTrip = () => {
         let userRef = db.ref('users/' + 'trip/'); 
@@ -62,9 +60,11 @@ export default class AddTrip extends React.Component {
           value={this.state.Location}
           />
           </View>
-            <Start parentCallBack = {this.callbackFunction}/>
-            
-            <EndDate></EndDate>
+            <Start updateData={StartDate => this.setState({ StartDate })}
+            value={this.state.StartDate}  />
+
+            <End updateData={EndDate => this.setState({ EndDate })}
+            value={this.state.EndDate} />
 
 
             <View style={styles.inputView}> 

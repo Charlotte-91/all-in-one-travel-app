@@ -15,12 +15,13 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 export default class EndDate extends React.Component {
     state={ 
         visibility: false,
-        DateDisplay: ""
+        EndDate: ""
     }
 
     handleConfirm=(date)=>{
         this.setState({EndDate:date.toDateString()})
         this.setState({visibility:false})
+        this.props.updateData(this.state.EndDate)
     }
 
     onPressCancel=()=>{

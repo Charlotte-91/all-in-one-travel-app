@@ -1,5 +1,5 @@
 //React Native elements//
-import React from 'react';
+import React, { useState } from 'react';
 import { render } from 'react-dom';
 import {Button, Text, View } from 'react-native';
 import 'react-native-gesture-handler';
@@ -12,18 +12,18 @@ require("firebase/firestore");
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-export default class StartDate extends React.Component {sendData =() => {
-    this.props.parentCallback(this.state.StartDate);
-}; 
+export default class StartDate extends React.Component {
     state={ 
         visibility: false,
         StartDate: ""
     }
     
-
+   
     handleConfirm=(date)=>{
         this.setState({StartDate:date.toDateString()})
         this.setState({visibility:false})
+        this.props.updateData(this.state.StartDate)
+
     }
 
     onPressCancel=()=>{
@@ -35,6 +35,7 @@ export default class StartDate extends React.Component {sendData =() => {
     }
 
     render() {
+        var handleToUpdate = this.props.handleToUpdate
         return(
         <View style={{alignItems:"center", justifyContent: "center"}}>
             <Button title="Select a Start Date" onPress={this.onPressButton}/>
