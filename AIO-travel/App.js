@@ -6,11 +6,10 @@ import { Button, Text, View, AppRegistry } from 'react-native';
 //React Navigation//
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
-//Firebase//
-import firebase from "firebase/app";
-import "firebase/database";
-// import * as firebase from "firebase/app";
-// import auth from '@react-native-firebase/auth';
+
+//Firebase
+import {db} from './config';
+
 // Stylesheets//
 import styles from './StyleSheet';
 //Screens//
@@ -20,25 +19,10 @@ import Home from './components/Home';
 import Loading from './components/Loading';
 import AddTrip from './components/AddTrip';
 
-
-
+//Create Stack Navigator//
 const Stack = createStackNavigator();
 
-//Firebase configuration
-//import firebaseConfig from "./firebase"
-const firebaseConfig = {
-  apiKey: "AIzaSyAUOBa16C-kSrd8QEP0Qoblem87C0fdPqg",
-  authDomain: "all-in-one-travel-app.firebaseapp.com",
-  databaseURL: "https://all-in-one-travel-app.firebaseio.com",
-  projectId: "all-in-one-travel-app",
-  storageBucket: "all-in-one-travel-app.appspot.com",
-  messagingSenderId: "465134482525",
-  appId: "1:465134482525:web:32dfb18f9779f5b735c9b4",
-  measurementId: "G-3EZ8RQ4477"
-};
-
-//Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+//Firebase config
 var config = {
   databaseURL: "https://all-in-one-travel-app.firebaseio.com/",
   projectId: "all-in-one-travel-app",

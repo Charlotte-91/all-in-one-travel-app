@@ -2,37 +2,51 @@
 import { setStatusBarNetworkActivityIndicatorVisible, StatusBar } from 'expo-status-bar';
 import React, { Component, useState }  from 'react';
 import { render } from 'react-dom';
-import {Button, Text, View, TextInput, TouchableOpacity, SafeAreaView, Platform } from 'react-native';
+import {Button, Text, View, TextInput, TouchableOpacity, SafeAreaView, Platform, useEffect } from 'react-native';
 import 'react-native-gesture-handler';
 //Stylesheets//
 import styles from '../StyleSheet';
 //Firebase//
-import firebase from "firebase/app";
-require("firebase/auth");
-require("firebase/firestore");
-//var database = firebase.database();
+import {db} from '../config';
+
 
 import DateTimePicker from '@react-native-community/datetimepicker';
 import Modal from 'react-native-modal';
-import StartDate from './StartDatePicker'
+import Start from './StartDatePicker'
 import EndDate from './EndDatePicker'
+
+
+
 
 export default class AddTrip extends React.Component {
     state = {
-        TripName: "",
+        TripName:"",
         Location:"",
-        StartDate: "",
+        StartDate:"",
         EndDate:"",
-        Notes: ""
+        Notes:""
+    };
+
+    callbackFunction = (StartDate) => {
+        this.setState({StartDate: StartDate})
     }
+
+    handleTrip = () => {
+        let userRef = db.ref('users/' + 'trip/'); 
+        userRef.set(
+            this.state
+        )
+        .then(() => this.props.navigation.navigate('Home'))
+        .catch(error => this.setState({errorMessage: error.message}))
+    };
     render() {
 
         return (
-            <View style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.inputView}>  
             <TextInput
           style={styles.inputText}
-          placeholder="Trip name"
+          placeholder="Trip Name"
           placeholderTextColor="#003f5c"
           onChangeText={TripName => this.setState({ TripName })}
           value={this.state.TripName}
@@ -48,7 +62,8 @@ export default class AddTrip extends React.Component {
           value={this.state.Location}
           />
           </View>
-            <StartDate></StartDate> 
+            <Start parentCallBack = {this.callbackFunction}/>
+            
             <EndDate></EndDate>
 
 

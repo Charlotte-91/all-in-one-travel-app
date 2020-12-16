@@ -12,11 +12,14 @@ require("firebase/firestore");
 
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
-export default class StartDate extends React.Component {
+export default class StartDate extends React.Component {sendData =() => {
+    this.props.parentCallback(this.state.StartDate);
+}; 
     state={ 
         visibility: false,
         StartDate: ""
     }
+    
 
     handleConfirm=(date)=>{
         this.setState({StartDate:date.toDateString()})
