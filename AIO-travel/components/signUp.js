@@ -17,6 +17,7 @@ export default class signUp extends React.Component {
     errorMessage: null
   }
 handleSignUp = () => {
+  const { email, password } = this.state
   firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)

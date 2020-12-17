@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 import styles from '../StyleSheet';
 //Firebase//
 import {db} from '../config';
+import firebase from "firebase/app";
 
 
 import DateTimePicker from '@react-native-community/datetimepicker';
@@ -16,10 +17,23 @@ import Start from './StartDatePicker'
 import End from './EndDatePicker'
 import { startClock } from 'react-native-reanimated';
 
+// const authPromise=()=>{
+//     return new Promise((resolve,reject)=>{
+//         const user = firebase.auth().currentUser;
+//         console.log(user.uid)
+//         return user
+//     })
+// }
+
+// setTimeout(authPromise,2000)
+// const user = firebase.auth().currentUser;
+// console.log(user.email)
+// console.log(user.uid)
 
 
 
 export default class AddTrip extends React.Component {
+
     state = {
         TripName:"",
         Location:"",
@@ -28,9 +42,9 @@ export default class AddTrip extends React.Component {
         Notes:""
     };
 
-
     handleTrip = () => {
-        let userRef = db.ref('users/' + 'trip/'); 
+        let user = firebase.auth().currentUser;
+        let userRef = db.ref('users/' + `${user.uid}/` + this.state.TripName); 
         userRef.set(
             this.state
         )
@@ -38,7 +52,7 @@ export default class AddTrip extends React.Component {
         .catch(error => this.setState({errorMessage: error.message}))
     };
     render() {
-
+    
         return (
         <View style={styles.container}>
             <View style={styles.inputView}>  
